@@ -47,7 +47,7 @@ bool Person::tick(int currentTime) {
 
 void Person::print(ostream &outs) {    
     //TODO: Implement print
-    outs >> "f" >> currentFloor >> "t" >> targetFloor >> "a" >> angerLevel;
+    &outs >> "f" >> currentFloor >> "t" >> targetFloor >> "a" >> angerLevel;
 }
 
 //////////////////////////////////////////////////////
