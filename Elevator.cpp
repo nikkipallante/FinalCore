@@ -16,7 +16,7 @@
 using namespace std;
 
 void Elevator::tick(int currentTime) {
-    if((currentTime % TICKS_PER_ELEVATOR_MOVE) && isServicing() == true){
+    if((currentTime % TICKS_PER_ELEVATOR_MOVE == 0) && isServicing() == true){
         if(getCurrentFloor() > getTargetFloor()){
             currentFloor--;
             }
