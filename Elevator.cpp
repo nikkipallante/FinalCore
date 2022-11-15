@@ -19,20 +19,15 @@ void Elevator::tick(int currentTime) {
     if((currentTime % TICKS_PER_ELEVATOR_MOVE) && isServicing() == true){
         if(getCurrentFloor() > getTargetFloor()){
             currentFloor--;
-            if(getCurrentFloor() == getTargetFloor()){
-                servicing = false;
             }
-            }
-        else if(getCurrentFloor() < getTargetFloor()){
-            currentFloor++;
-            if(getCurrentFloor() == getTargetFloor()){
-                servicing = false;
-            }
-        }
         else{
-            servicing = false;
+            currentFloor++;
+            }
         }
+    if(getCurrentFloor() == getTargetFloor()){
+        servicing = false;
     }
+    
 }
 
 void Elevator::serviceRequest(int floorNum) {
