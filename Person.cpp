@@ -21,7 +21,7 @@ Person::Person(string inputString) : Person() {
     //TODO: Implement non-default constructor
     stringstream ss(inputString);
     //stores the letters within the string, allowing for ints to be separately recorded
-    string trashbin;
+    char trashbin;
     ss >> turn;
     ss >> trashbin;
     ss >> currentFloor;
