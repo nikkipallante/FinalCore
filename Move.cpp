@@ -18,19 +18,105 @@
 
 using namespace std;
 
-Move::Move(string commandString) : Move() {
-    //TODO: Implement non-default constructor
+Move::Move(string commandString) : Move()
+{
+    if(commandString == "s")
+    {
+        elevatorId = -1;
+        targetFloor = -1;
+        numPeopleToPickup = 0;
+        totalSatisfaction = 0;
+        isPass = false;
+        isPickup = false;
+        isSave = true;
+        isQuit = false;
+    }
+    else if(commandString == "q")
+    {
+        elevatorId = -1;
+        targetFloor = -1;
+        numPeopleToPickup = 0;
+        totalSatisfaction = 0;
+        isPass = false;
+        isPickup = false;
+        isSave = false;
+        isQuit = true;
+    }
+    else if(commandString == "")
+    {
+        elevatorId = -1;
+        targetFloor = -1;
+        numPeopleToPickup = 0;
+        totalSatisfaction = 0;
+        isPass = true;
+        isPickup = false;
+        isSave = false;
+        isQuit = false;
+    }
+    else if(commandString[2] == 'p')
+    {
+        elevatorId = commandString[1];
+        targetFloor = -1;
+        numPeopleToPickup = 0;
+        totalSatisfaction = 0;
+        isPass = false;
+        isPickup = true;
+        isSave = false;
+        isQuit = false;
+    }
+    else if(commandString[2] == 'f')
+    {
+        elevatorId = commandString[1];
+        targetFloor = commandString[3];
+        numPeopleToPickup = 0;
+        totalSatisfaction = 0;
+        isPass = false;
+        isPickup = false;
+        isSave = false;
+        isQuit = false;
+    }
 }
 
-bool Move::isValidMove(Elevator elevators[NUM_ELEVATORS]) const {
-    //TODO: Implement isValidMove
+bool Move::isValidMove(Elevator elevators[NUM_ELEVATORS]) const
+{
+    if(isPass || isSave || isQuit)
+    {
+        return true;
+    }
+    if(0 <= elevatorId && elevatorId < NUM_ELEVATORS)
+    {
+        if(elevators[elevatorId].isServicing())
+        {
+            return false;
+        }
+    }
+    else
+    {
+        return false;
+    }
+    if(!isPickup)
+    {
+        if(0 <= targetFloor && targetFloor < NUM_FLOORS)
+        {
+            if(targetFloor == elevators[elevatorId].getCurrentFloor())
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+void Move::setPeopleToPickup(const string& pickupList, const int currentFloor, const Floor& pickupFloor)
+{
+    numPeopleToPickup = 0;
+    totalSatisfaction = 0;
+    for(int i = 0; i < pickupList.length(); ++i)
+    {
+        peopleToPickup[i] = (int)pickupList[i];
+        ++numPeopleToPickup;
+    }
     
-    //Returning false to prevent compilation error
-    return false;
-}
-
-void Move::setPeopleToPickup(const string& pickupList, const int currentFloor, const Floor& pickupFloor) {
-    //TODO: Implement setPeopleToPickup
 }
 
 //////////////////////////////////////////////////////
