@@ -55,7 +55,7 @@ Move::Move(string commandString) : Move()
     }
     else if(commandString[2] == 'p')
     {
-        elevatorId = commandString[1];
+        elevatorId = commandString[1] - '0';
         targetFloor = -1;
         numPeopleToPickup = 0;
         totalSatisfaction = 0;
@@ -66,8 +66,8 @@ Move::Move(string commandString) : Move()
     }
     else if(commandString[2] == 'f')
     {
-        elevatorId = commandString[1];
-        targetFloor = commandString[3];
+        elevatorId = commandString[1] - '0';
+        targetFloor = commandString[3] - '0';
         numPeopleToPickup = 0;
         totalSatisfaction = 0;
         isPass = false;
