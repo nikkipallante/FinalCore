@@ -17,22 +17,60 @@ using namespace std;
 
 int Floor::tick(int currentTime) {
     //TODO: Implement tick
-
-    //returning 0 to prevent compilation error
-    return 0;
+    int countExploded = 0;
+    int j = 0;
+    int indicesToRemove[MAX_PEOPLE_PER_FLOOR];
+    if (currentTime % TICKS_PER_ANGER_INCREASE == 0) {
+        for (int i = 0; i < numPeople; i++) {
+            if (people[i].tick(currentTime) == true) {
+                indicesToRemove[j] = i;
+                j++;
+                countExploded++;
+            }
+        }
+        removePeople(indicesToRemove, countExploded);
+    }
+    return countExploded;
 }
 
 void Floor::addPerson(Person newPerson, int request) {
     //TODO: Implement addPerson
+    people[numPeople] = newPerson;
+    if ( request > 0 ) {
+        setHasUpRequest(true);
+    }
+    if ( request > 0) {
+        setHasDownRequest(true);
+    }
+    numPeople++;
+    resetRequests();
 }
 
 void Floor::removePeople(int indicesToRemove[MAX_PEOPLE_PER_FLOOR], int numPeopleToRemove) {
-    //TODO: Implement removePeople
+    Person tempPeople[MAX_PEOPLE_PER_FLOOR];
+    int removeIndex = 0;
+    int tempIndex = 0;
+    sort(indicesToRemove, indicesToRemove + numPeopleToRemove);
+    for (int i = 0; i < MAX_PEOPLE_PER_FLOOR; i++) {
+        if (indicesToRemove[removeIndex] == i) {
+            removeIndex++;
+        }
+        else if (indicesToRemove[removeIndex] != i) {
+            tempPeople[tempIndex] = getPersonByIndex(i);
+            tempIndex++;
+        }
+    }
+    for (int i = 0; i < MAX_PEOPLE_PER_FLOOR; i++) {
+        people[i] = tempPeople[i];
+    }
+    resetRequests();
+    // Creat an array to store the people who will stay
 }
 
 void Floor::resetRequests() {
     //TODO: Implement resetRequests
 }
+
 
 //////////////////////////////////////////////////////
 ////// DO NOT MODIFY ANY CODE BENEATH THIS LINE //////
