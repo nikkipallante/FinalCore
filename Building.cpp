@@ -15,17 +15,34 @@
 using namespace std;
 
 void Building::spawnPerson(Person newPerson){
-    //TODO: Implement spawnPerson
+    int currentFloor = newPerson.getCurrentFloor();
+    floors[currentFloor].addPerson(newPerson, currentFloor);
 }
 
 void Building::update(Move move){
-    //TODO: Implement update
+    int elevatorNum = 0;
+    int tempArr[MAX_PEOPLE_PER_FLOOR];
+    
+    if(move.isPassMove()){
+        
+    }
+    else{
+        elevatorNum = move.getElevatorId();
+        elevators[elevatorNum].serviceRequest(move.getTargetFloor());
+        if(move.isPickupMove()){
+            int currentFloor = elevators[elevatorNum].getCurrentFloor();
+            move.copyListOfPeopleToPickup(tempArr);
+            floors[currentFloor].removePeople(tempArr, move.getNumPeopleToPickup());
+        }
+    }
 }
 
 int Building::tick(Move move){
-    //TODO: Implement tick
-
-    //returning 0 to prevent compilation error
+    //im confused so this definetly doesnt work
+    time++;
+    update(move);
+    setTime(time);
+    //no idea how to return exploded people
     return 0;
 }
 
