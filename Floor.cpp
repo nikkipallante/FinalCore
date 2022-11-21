@@ -63,7 +63,7 @@ void Floor::removePeople(int indicesToRemove[MAX_PEOPLE_PER_FLOOR], int numPeopl
 			if (i == indicesToRemove[j])
 				keep = false;
 		}
-		if (keep = true)
+		if (keep == true)
 		{
 			tempPeople[numpeoplecopied] = people[i];
 			numpeoplecopied++;
