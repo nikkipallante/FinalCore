@@ -40,7 +40,7 @@ void Floor::addPerson(Person newPerson, int request) {
     if ( request > 0 ) {
         setHasUpRequest(true);
     }
-    if ( request > 0) {
+    if ( request < 0) {
         setHasDownRequest(true);
     }
     numPeople++;
