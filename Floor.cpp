@@ -89,6 +89,33 @@ void Floor::resetRequests() {
             setHasDownRequest(true);
         }
     }
+
+	
+/*
+    int upCount = 0;
+    int downCount = 0;
+    
+    for (int i = 0; i < MAX_PEOPLE_PER_FLOOR; i++) {
+        if (people[i].getCurrentFloor() - people[i].getTargetFloor() < 0) {
+            upCount++;
+        }
+        if (people[i].getCurrentFloor() - people[i].getTargetFloor() > 0) {
+            downCount++;
+        }
+    }
+    if(upCount > 0){
+        setHasUpRequest(true);
+    }
+    else{
+        setHasUpRequest(false);
+    }
+    if(downCount > 0){
+        setHasDownRequest(true);
+    }
+    else{
+        setHasDownRequest(false);
+    }
+*/
 }
 
 
