@@ -69,6 +69,7 @@ void Floor::removePeople(int indicesToRemove[MAX_PEOPLE_PER_FLOOR], int numPeopl
 			numpeoplecopied++;
 		}	
 	}
+	numPeople = numpeoplecopied;
     resetRequests();
     // Creat an array to store the people who will stay
 }
