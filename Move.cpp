@@ -39,7 +39,7 @@ Move::Move(string commandString) : Move()
         totalSatisfaction = 0;
         isPass = false;
         isPickup = false;
-        isSave = false;
+        isSave = true;
         isQuit = true;
     }
     else if(commandString == "")
@@ -51,7 +51,7 @@ Move::Move(string commandString) : Move()
         isPass = true;
         isPickup = false;
         isSave = false;
-        isQuit = false;
+        isQuit = true;
     }
     else if(commandString[2] == 'p')
     {
