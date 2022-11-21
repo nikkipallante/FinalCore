@@ -41,9 +41,19 @@ int Building::tick(Move move){
     //im confused so this definetly doesnt work
     time++;
     update(move);
-    setTime(time);
+    int expPeople = 0;
+    for (int i = 0; i < NUM_ELEVATORS; i++)
+    {
+        elevator[i].tick(time);
+    }
+    for (int i = 0; i < NUM_ELEVATORS; i++)
+    {
+        floors[i].tick(time);
+        expPeople += floors[i].tick(time);
+    }
+    //setTime(time);
     //no idea how to return exploded people
-    return 0;
+    return expPeople;
 }
 
 //////////////////////////////////////////////////////
