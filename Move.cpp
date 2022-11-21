@@ -20,7 +20,7 @@ using namespace std;
 
 Move::Move(string commandString) : Move()
 {
-    if(commandString == "s")
+    if(commandString == "s" || commandString == "S")
     {
         elevatorId = -1;
         targetFloor = -1;
@@ -31,7 +31,7 @@ Move::Move(string commandString) : Move()
         isSave = true;
         isQuit = false;
     }
-    else if(commandString == "q")
+    else if(commandString == "q" || commandString == "Q")
     {
         elevatorId = -1;
         targetFloor = -1;
