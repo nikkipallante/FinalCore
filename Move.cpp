@@ -111,12 +111,18 @@ void Move::setPeopleToPickup(const string& pickupList, const int currentFloor, c
 {
     numPeopleToPickup = 0;
     totalSatisfaction = 0;
-    for(int i = 0; i < pickupList.length(); ++i)
+    int maxDistance = 0;
+    for(int i = 0; i < pickupList.size(); i++)
     {
-        peopleToPickup[i] = (int)pickupList[i];
-        ++numPeopleToPickup;
+        peopleToPickup[i] = pickupList.at(i) - '0';
+        numPeopleToPickup++;
+        Person p = pickupFloor.getPersonByIndex(peopleToPickup[i]);
+        totalSatisfaction += MAX_ANGER - p.getAngerLevel();
+        if(maxDistance < abs(p.getTargetFloor() - currentFloor)){
+            maxDistance = abs(p.getTargetFloor() - currentFloor);
+            targetFloor = p.getTargetFloor();
+        }
     }
-    
 }
 
 //////////////////////////////////////////////////////
