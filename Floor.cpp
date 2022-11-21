@@ -36,15 +36,18 @@ int Floor::tick(int currentTime) {
 
 void Floor::addPerson(Person newPerson, int request) {
     //TODO: Implement addPerson
+    if(numPeople < MAX_PEOPLE_PER_FLOOR){
     people[numPeople] = newPerson;
     if ( request > 0 ) {
         setHasUpRequest(true);
     }
-    if ( request < 0) {
+    if ( request > 0) {
         setHasDownRequest(true);
     }
     numPeople++;
     resetRequests();
+    }
+}
 }
 
 void Floor::removePeople(int indicesToRemove[MAX_PEOPLE_PER_FLOOR], int numPeopleToRemove) {
