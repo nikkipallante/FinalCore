@@ -17,10 +17,11 @@ using namespace std;
 
 int Floor::tick(int currentTime) {
     //TODO: Implement tick
+    
     int countExploded = 0;
     int j = 0;
     int indicesToRemove[MAX_PEOPLE_PER_FLOOR];
-    if (currentTime % TICKS_PER_ANGER_INCREASE == 0) {
+   // if (currentTime % TICKS_PER_ANGER_INCREASE == 0) {
         for (int i = 0; i < numPeople; i++) {
             if (people[i].tick(currentTime) == true) {
                 indicesToRemove[j] = i;
@@ -29,7 +30,7 @@ int Floor::tick(int currentTime) {
             }
         }
         removePeople(indicesToRemove, countExploded);
-    }
+    //}
     return countExploded;
 }
 
