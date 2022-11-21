@@ -44,7 +44,7 @@ int Building::tick(Move move){
     int expPeople = 0;
     for (int i = 0; i < NUM_ELEVATORS; i++)
     {
-        elevator[i].tick(time);
+        elevators[i].tick(time);
     }
     for (int i = 0; i < NUM_ELEVATORS; i++)
     {
