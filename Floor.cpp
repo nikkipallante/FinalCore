@@ -53,21 +53,22 @@ void Floor::addPerson(Person newPerson, int request) {
 
 void Floor::removePeople(int indicesToRemove[MAX_PEOPLE_PER_FLOOR], int numPeopleToRemove) {
     Person tempPeople[MAX_PEOPLE_PER_FLOOR];
-    int removeIndex = 0;
-    int tempIndex = 0;
-    sort(indicesToRemove, indicesToRemove + numPeopleToRemove);
-    for (int i = 0; i < MAX_PEOPLE_PER_FLOOR; i++) {
-        if (indicesToRemove[removeIndex] == i && numPeopleToRemove != 0) {
-            removeIndex++;
-        }
-        else if (indicesToRemove[removeIndex] != i) {
-            tempPeople[tempIndex] = getPersonByIndex(i);
-            tempIndex++;
-        }
-    }
-    for (int i = 0; i < MAX_PEOPLE_PER_FLOOR; i++) {
-        people[i] = tempPeople[i];
-    }
+    bool keep = true;
+    int numpeoplecopied = 0;
+	for (int i = 0; i < numPeople; i++)
+	{
+		keep = true;
+		for (int j = 0; j < numPeopleToRemove; j++)
+		{
+			if (i == indicesToRemove[j])
+				keep = false;
+		}
+		if (keep = true)
+		{
+			tempPeople[numpeoplecopied] = people[i];
+			numpeoplecopied++;
+		}	
+	}
     resetRequests();
     // Creat an array to store the people who will stay
 }
