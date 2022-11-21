@@ -74,7 +74,7 @@ void Floor::resetRequests() {
             setHasUpRequest(true);
         }
         else if (people[i].getTargetFloor() - people[i].getCurrentFloor() < 0) {
-            setHasDownRequest(false);
+            setHasDownRequest(true);
         }
     }
 }
