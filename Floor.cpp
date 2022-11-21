@@ -57,7 +57,7 @@ void Floor::removePeople(int indicesToRemove[MAX_PEOPLE_PER_FLOOR], int numPeopl
     int tempIndex = 0;
     sort(indicesToRemove, indicesToRemove + numPeopleToRemove);
     for (int i = 0; i < MAX_PEOPLE_PER_FLOOR; i++) {
-        if (indicesToRemove[removeIndex] == i) {
+        if (indicesToRemove[removeIndex] == i && numPeopleToRemove != 0) {
             removeIndex++;
         }
         else if (indicesToRemove[removeIndex] != i) {
