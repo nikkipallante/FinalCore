@@ -77,7 +77,7 @@ bool Game::isValidPickupList(const string& pickupList, const int pickupFloorNum)
     // checks to see if pickupList is less than number of people on the floor
     for (int m = 0; m < pickupList.length(); m++)
     {
-        if (pickupList[m] >= building.getFloorByFloorNum(pickupFloorNum).getnumPeople()){
+        if (pickupList[m] >= building.getFloorByFloorNum(pickupFloorNum).getNumPeople()){
             valid = false;
         }
     }
