@@ -74,9 +74,9 @@ void Game::playGame(bool isAIModeIn, ifstream& gameFile)
 bool Game::isValidPickupList(const string& pickupList, const int pickupFloorNum) const {
      bool valid = true;
     // checks for duplicates. 
-    for (int i = 0; i < pickupList.length() - 2; i++)
+    for (int i = 0; i < pickupList.length() - 1; i++)
      {
-         for (int j = i + 1; j < pickupList.length() - 1; j++)
+         for (int j = i + 1; j < pickupList.length(); j++)
          {
              if (pickupList[i] == pickupList[j])
              {
