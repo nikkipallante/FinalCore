@@ -94,8 +94,10 @@ void Floor::resetRequests() {
 
     int upCount = 0;
     int downCount = 0;
+    setHasUpRequest(false);
+    setHasDownRequest(false);
     
-    for (int i = 0; i < MAX_PEOPLE_PER_FLOOR; i++) {
+    for (int i = 0; i < getNumPeople(); i++) {
         if (people[i].getCurrentFloor() - people[i].getTargetFloor() < 0) {
             upCount++;
         }
@@ -106,14 +108,8 @@ void Floor::resetRequests() {
     if(upCount > 0){
         setHasUpRequest(true);
     }
-    else{
-        setHasUpRequest(false);
-    }
     if(downCount > 0){
         setHasDownRequest(true);
-    }
-    else{
-        setHasDownRequest(false);
     }
 
 }
