@@ -22,21 +22,25 @@ using namespace std;
 void Game::playGame(bool isAIModeIn, ifstream& gameFile) 
 {
  Elevator elev1;
- if(gameFile.fail())
- {
-  cout << 1;
-  //set isAIMode
-  // print start prompt
- }
- else
- {
-  //not sure how to make it read events from this file
-  gameFile;
-   if(elev1.isServicing)
-   {
-    update(move);
-   }
-  }
+    if(gameFile.fail())
+    {
+        cout << 1;
+        //set isAIMode
+        cout << 
+    }
+    else
+    {
+        gameFile;
+            if(elev1.isServicing)
+            {
+                update(Move);
+            }
+            else
+            {
+                outs << building;
+            }
+    }
+}
   
     std::mt19937 gen(1);
     std::uniform_int_distribution<> floorDist(0, 9);
