@@ -24,7 +24,7 @@ void Game::playGame(bool isAIModeIn, ifstream& gameFile)
  Elevator elev1;
     if(gameFile.fail())
     {
-        cout << 1;
+        exit(1);
         //set isAIMode
         cout << 
     }
