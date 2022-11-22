@@ -103,10 +103,18 @@ bool Game::isValidPickupList(const string& pickupList, const int pickupFloorNum)
         }
     }
     //checks to see if the elevator is being called in two directions, if so, request not valid DEFINITELY WRONG
-    if (floor[pickupFloorNum].getHasUpRequest() && floor[pickupFloorNum].getHasDownRequest()){
+    int count = 0;
+    for (int s = 0; s < pickupList.length(); s++)
+    {
+        if (floor[pickupFloorNum].getPersonByIndex(s).getTargetValue() - pickupFloorNum > 0)
+        {
+            count++;
+        }
+    }
+    if (count != 0 && count != pickupList.length())
+    {
         valid = false;
     }
-    
      return valid;
 }
 
