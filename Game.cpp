@@ -21,28 +21,7 @@ using namespace std;
 // You *must* revise this function according to the RME and spec
 void Game::playGame(bool isAIModeIn, ifstream& gameFile) 
 {
- Elevator elev1;
-    if(gameFile.fail())
-    {
-        exit(1);
-        //set isAIMode
-        cout << 
-    }
-    else
-    {
-        gameFile;
-            if(elev1.isServicing)
-            {
-                update(Move);
-            }
-            else
-            {
-                outs << building;
-            }
-    }
-}
-  
-    std::mt19937 gen(1);
+std::mt19937 gen(1);
     std::uniform_int_distribution<> floorDist(0, 9);
     std::uniform_int_distribution<> angerDist(0, 3);
 
