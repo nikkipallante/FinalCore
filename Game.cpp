@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2022 University of Michigan EECS183
  *
  * Game.cpp
@@ -15,24 +15,23 @@
 #include "Game.h"
 #include "AI.h"
 #include "Utility.h"
-#include "Elevator.h"
 using namespace std;
 
 // Stub for playGame for Core, which plays random games
 // You *must* revise this function according to the RME and spec
-void Game::playGame(bool isAIModeIn, ifstream& gameFile)
+void Game::playGame(bool isAIModeIn, ifstream& gameFile) 
 {
-    //Elevator elev1;
+ Elevator elev1;
     if(gameFile.fail())
     {
         exit(1);
         //set isAIMode
-       
+        cout << 
     }
     else
     {
         gameFile;
-            if(isServicing())
+            if(elev1.isServicing)
             {
                 update(Move);
             }
@@ -41,6 +40,8 @@ void Game::playGame(bool isAIModeIn, ifstream& gameFile)
                 outs << building;
             }
     }
+}
+  
     std::mt19937 gen(1);
     std::uniform_int_distribution<> floorDist(0, 9);
     std::uniform_int_distribution<> angerDist(0, 3);
@@ -71,7 +72,35 @@ void Game::playGame(bool isAIModeIn, ifstream& gameFile)
 // Stub for isValidPickupList for Core
 // You *must* revise this function according to the RME and spec
 bool Game::isValidPickupList(const string& pickupList, const int pickupFloorNum) const {
-    return true;
+     bool valid = true;
+    // checks for duplicates. 
+    for (int i = 0; i < pickupList.length() - 2; i++)
+     {
+         for (int j = i + 1; j < pickupList.length() - 1; j++)
+         {
+             if (pickupList[i] == pickupList[j])
+             {
+                 valid = false;
+             }
+         }
+     }
+    //checks to see if any person id is negative
+    for (int k = 0; k < pickupList.length() - 1; k++)
+    {
+        if (pickupList[k] < 0)
+            valid = false;
+    }
+    //Checks to see if pick up list is less than elevator capacity
+    if (pickupList.length() > ELEVATOR_CAPACITY)
+        valid = false;
+    // checks to see if pickupList is less than number of people on the floor DEFINITELY WRONG
+    if (pickupList.length() >= floor[pickupFloorNum].getnumPeople())
+        valid = false;
+    //checks to see if the elevator is being called in two directions, if so, request not valid DEFINITELY WRONG
+    if (floor[pickupFloorNum].getHasUpRequest() && floor[pickupFloorNum].getHasDownRequest())
+        valid = false;
+    
+     return valid;
 }
 
 //////////////////////////////////////////////////////
