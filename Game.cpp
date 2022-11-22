@@ -87,21 +87,25 @@ bool Game::isValidPickupList(const string& pickupList, const int pickupFloorNum)
     //checks to see if any person id is negative
     for (int k = 0; k < pickupList.length(); k++)
     {
-        if (pickupList[k] < 0)
+        if (pickupList[k] < 0){
             valid = false;
+        }
     }
     //Checks to see if pick up list is less than elevator capacity
-    if (pickupList.length() > ELEVATOR_CAPACITY)
+    if (pickupList.length() > ELEVATOR_CAPACITY){
         valid = false;
+    }
     // checks to see if pickupList is less than number of people on the floor
     for (int m = 0; m < pickupList.length(); m++)
     {
-        if (pickupList[m] >= floor[pickupFloorNum].getnumPeople())
+        if (pickupList[m] >= floor[pickupFloorNum].getnumPeople()){
             valid = false;
+        }
     }
     //checks to see if the elevator is being called in two directions, if so, request not valid DEFINITELY WRONG
-    if (floor[pickupFloorNum].getHasUpRequest() && floor[pickupFloorNum].getHasDownRequest())
+    if (floor[pickupFloorNum].getHasUpRequest() && floor[pickupFloorNum].getHasDownRequest()){
         valid = false;
+    }
     
      return valid;
 }
