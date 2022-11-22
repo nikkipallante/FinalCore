@@ -94,8 +94,11 @@ bool Game::isValidPickupList(const string& pickupList, const int pickupFloorNum)
     if (pickupList.length() > ELEVATOR_CAPACITY)
         valid = false;
     // checks to see if pickupList is less than number of people on the floor DEFINITELY WRONG
-    if (pickupList.length() >= floor[pickupFloorNum].getnumPeople())
+    for (int m = 0; m < pickupList.length(); m++)
+    {
+        if (pickupList[m] >= floor[pickupFloorNum].getnumPeople())
         valid = false;
+    }
     //checks to see if the elevator is being called in two directions, if so, request not valid DEFINITELY WRONG
     if (floor[pickupFloorNum].getHasUpRequest() && floor[pickupFloorNum].getHasDownRequest())
         valid = false;
