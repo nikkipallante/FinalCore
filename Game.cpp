@@ -85,7 +85,7 @@ bool Game::isValidPickupList(const string& pickupList, const int pickupFloorNum)
          }
      }
     //checks to see if any person id is negative
-    for (int k = 0; k < pickupList.length() - 1; k++)
+    for (int k = 0; k < pickupList.length(); k++)
     {
         if (pickupList[k] < 0)
             valid = false;
