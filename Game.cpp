@@ -65,11 +65,11 @@ bool Game::isValidPickupList(const string& pickupList, const int pickupFloorNum)
      }
     //checks to see if any person id is negative
     for (int k = 0; k < pickupList.length(); k++)
-        {
-            if (pickupList[k] < 0){
-                valid = false;
-            }
-        }
+       {
+           if ((int)pickupList[k] < 0 || (int)pickupList[k] > 10){
+               valid = false;
+           }
+       }
         //Checks to see if pick up list is less than elevator capacity
         if (pickupList.length() > ELEVATOR_CAPACITY){
             valid = false;
