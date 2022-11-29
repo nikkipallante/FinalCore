@@ -74,7 +74,7 @@ bool Game::isValidPickupList(const string& pickupList, const int pickupFloorNum)
         if (pickupList.length() > ELEVATOR_CAPACITY){
             valid = false;
         }
-        // checks to see if pickupList is less than number of people on the floor
+      /*  // checks to see if pickupList is less than number of people on the floor
         for (int m = 0; m < pickupList.length(); m++)
         {
             if (pickupList[m] >= building.getFloorByFloorNum(pickupFloorNum).getNumPeople()){
@@ -93,7 +93,7 @@ bool Game::isValidPickupList(const string& pickupList, const int pickupFloorNum)
         if (count != 0 && count != pickupList.length())
         {
             valid = false;
-        }
+        }*/
      return valid;
 }
 
