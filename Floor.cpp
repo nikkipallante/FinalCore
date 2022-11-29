@@ -79,38 +79,16 @@ void Floor::removePeople(int indicesToRemove[MAX_PEOPLE_PER_FLOOR], int numPeopl
 }
 
 void Floor::resetRequests() {
-	/*setHasUpRequest(false);
-	setHasDownRequest(false);
-    for (int i = 0; i < MAX_PEOPLE_PER_FLOOR; i++) {
-        if (people[i].getTargetFloor() - people[i].getCurrentFloor() > 0) {
-            setHasUpRequest(true);
-        }
-        else if (people[i].getTargetFloor() - people[i].getCurrentFloor() < 0) {
-            setHasDownRequest(true);
-        }
-    }*/
-
-	
-
-    int upCount = 0;
-    int downCount = 0;
-    setHasUpRequest(false);
-    setHasDownRequest(false);
-    
-    for (int i = 0; i < getNumPeople(); i++) {
-        if (people[i].getCurrentFloor() - people[i].getTargetFloor() < 0) {
-            upCount++;
-        }
-        if (people[i].getCurrentFloor() - people[i].getTargetFloor() > 0) {
-            downCount++;
-        }
-    }
-    if(upCount > 0){
-        setHasUpRequest(true);
-    }
-    if(downCount > 0){
-        setHasDownRequest(true);
-    }
+	setHasUpRequest(false);
+    	setHasDownRequest(false);
+	for(int i = 0; i < numPeople; i++){
+		if(people[i].getCurrentFloor() > people[i].getTargetFloor()){
+			setHasDownRequest(true);
+		}
+		if(people[i].getCurrentFloor() < people[i].getTargetFloor()){
+			setHasUpRequest(true);
+		}
+	}
 
 }
 
