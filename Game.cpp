@@ -21,30 +21,35 @@ using namespace std;
 // You *must* revise this function according to the RME and spec
 void Game::playGame(bool isAIModeIn, ifstream& gameFile) 
 {
-std::mt19937 gen(1);
-    std::uniform_int_distribution<> floorDist(0, 9);
-    std::uniform_int_distribution<> angerDist(0, 3);
-
-    isAIMode = isAIModeIn;
-    printGameStartPrompt();
-    initGame(gameFile);
-
-    while (true) {
-        int src = floorDist(gen);
-        int dst = floorDist(gen);
-        if (src != dst) {
-            std::stringstream ss;
-            ss << "0f" << src << "t" << dst << "a" << angerDist(gen);
-            Person p(ss.str());
-            building.spawnPerson(p);
+if(!gameFile.is_open()){
+        exit(1);
+    }
+    else{
+        isAIMode = isAIModeIn;
+        printGameStartPrompt();
+        initGame(gameFile);
+        string event;
+        while(gameFile >> event){
+            Person person(event);
+            
+            while(person.getTurn() > building.getTime()){
+                
+                building.prettyPrintBuilding(cout);
+                satisfactionIndex.printSatisfaction(cout, false);
+                checkForGameEnd();
+                
+                Move nextMove = getMove();
+                update(nextMove);
+            }
+            building.spawnPerson(person);
         }
-
-        building.prettyPrintBuilding(cout);
-        satisfactionIndex.printSatisfaction(cout, false);
-        checkForGameEnd();
-
-        Move nextMove = getMove();
-        update(nextMove);
+        while(true){
+            building.prettyPrintBuilding(cout);
+            satisfactionIndex.printSatisfaction(cout, false);
+            checkForGameEnd();
+            Move nextMove = getMove();
+            update(nextMove);
+        }
     }
 }
 
