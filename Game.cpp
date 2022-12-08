@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright 2022 University of Michigan EECS183
  *
  * Game.cpp
@@ -70,38 +70,43 @@ bool Game::isValidPickupList(const string& pickupList, const int pickupFloorNum)
      }
     //checks to see if any person id is negative
     for (int k = 0; k < pickupList.length(); k++)
+    {
+       if (pickupList[k] - 48 < 0 || pickupList[k]-48 > 9)
        {
-           if ((int)pickupList[k] < 0 || (int)pickupList[k] > 10){
-               valid = false;
-           }
+           valid = false;
        }
-        //Checks to see if pick up list is less than elevator capacity
-        if (pickupList.length() > ELEVATOR_CAPACITY){
-            valid = false;
-        }
+    }
+    //Checks to see if pick up list is less than elevator capacity
+    if (pickupList.length() > ELEVATOR_CAPACITY)
+    {
+        valid = false;
+    }
       // checks to see if pickupList is less than number of people on the floor
-        int max = 0;
-    for(int i = 0; i < pickupList.length() - 1; i++){
-        if(pickupList[i] > pickupList[i + 1]){
+    int max = 0;
+    for(int i = 0; i < pickupList.length() - 1; i++)
+    {
+        if(pickupList[i] > pickupList[i + 1])
+        {
             max = pickupList[i];
         }
     }
-    if(building.getFloorByFloorNum(pickupFloorNum).getNumPeople() < max){
+    if(building.getFloorByFloorNum(pickupFloorNum).getNumPeople() < max)
+    {
         valid = false;
     }
-        //checks to see if the elevator is being called in two directions, if so, request not valid DEFINITELY WRONG
-        int count = 0;
-        for (int s = 0; s < pickupList.length(); s++)
+    //checks to see if the elevator is being called in two directions, if so, request not valid DEFINITELY WRONG
+    int count = 0;
+    for (int s = 0; s < pickupList.length(); s++)
+    {
+        if (building.getFloorByFloorNum(pickupFloorNum).getPersonByIndex(s).getTargetFloor() - pickupFloorNum > 0)
         {
-            if (building.getFloorByFloorNum(pickupFloorNum).getPersonByIndex(s).getTargetFloor() - pickupFloorNum > 0)
-            {
-                count++;
-            }
+            count++;
         }
-        if (count != 0 && count != pickupList.length())
-        {
-            valid = false;
-        }
+    }
+    if (count != 0 && count != pickupList.length())
+    {
+        valid = false;
+    }
      return valid;
 }
 
