@@ -79,48 +79,47 @@ Move::Move(string commandString) : Move()
 
 bool Move::isValidMove(Elevator elevators[NUM_ELEVATORS]) const
 {
+    bool moveIsValid = false;
     if(isPass || isSave || isQuit)
     {
-        return true;
+        moveIsValid = true;
     }
-    if(0 <= elevatorId && elevatorId < NUM_ELEVATORS)
+    else if(elevatorId >= 0 && elevatorId < NUM_ELEVATORS && !elevators[elevatorId].isServicing())
     {
-        if(elevators[elevatorId].isServicing())
+        if(isPickup)
         {
-            return false;
+            moveIsValid = true;
+        }
+        else if(targetFloor >= 0 && targetFloor < NUM_FLOORS && targetFloor != elevators[elevatorId].getCurrentFloor())
+        {
+            moveIsValid = true;
         }
     }
-    else
-    {
-        return false;
-    }
-    if(!isPickup)
-    {
-        if(0 <= targetFloor && targetFloor < NUM_FLOORS)
-        {
-            if(targetFloor == elevators[elevatorId].getCurrentFloor())
-            {
-                return false;
-            }
-        }
-    }
-    return true;
+    return moveIsValid;
 }
 
 void Move::setPeopleToPickup(const string& pickupList, const int currentFloor, const Floor& pickupFloor)
 {
     numPeopleToPickup = 0;
     totalSatisfaction = 0;
-    int maxDistance = 0;
-    for(int i = 0; i < pickupList.size(); i++)
+    targetFloor = 0;
+    int distance = 0;
+    
+    for(int i = 0; i < pickupList.length(); i++)
     {
-        peopleToPickup[i] = pickupList.at(i) - '0';
+        char num = pickupList.at(i);
+        int personIndex = num - '0';
+        peopleToPickup[i] = personIndex;
         numPeopleToPickup++;
-        Person p = pickupFloor.getPersonByIndex(peopleToPickup[i]);
-        totalSatisfaction += MAX_ANGER - p.getAngerLevel();
-        if(maxDistance < abs(p.getTargetFloor() - currentFloor)){
-            maxDistance = abs(p.getTargetFloor() - currentFloor);
-            targetFloor = p.getTargetFloor();
+        
+        int angerLevel = pickupFloor.getPersonByIndex(peopleToPickup[i]).getAngerLevel();
+        totalSatisfaction += (MAX_ANGER - angerLevel);
+        
+        int targetFloorTemp = pickupFloor.getPersonByIndex(peopleToPickup[i]).getTargetFloor();
+        if(abs(targetFloorTemp - currentFloor) > distance)
+        {
+            distance = abs(targetFloorTemp = currentFloor);
+            targetFloor = targetFloorTemp;
         }
     }
 }
