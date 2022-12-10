@@ -22,7 +22,7 @@ string getAIMoveString(const BuildingState& buildingState)
     int floorMostPeople = 0;
     for(int i = 0; i < NUM_FLOORS; i++)
     {
-        if(buildingState.floors[i].numPeople > buildingState.floors[floorMostPeople].getNumPeople())
+        if(buildingState.floors[i].numPeople > buildingState.floors[floorMostPeople].getNumPeople)
         {
             floorMostPeople = i;
         }
@@ -30,12 +30,17 @@ string getAIMoveString(const BuildingState& buildingState)
     int elevatorToUse = 0;
     for(int i = 0; i < NUM_ELEVATORS; i++)
     {
-        if(!buildingState.elevators[i].isServicing())
+        if(!buildingState.elevators[i].isServicing)
         {
             elevatorToUse = i;
             break;
         }
     }
+    if(buildingState.elevators[0].isServicing && buildingState.elevators[1].isServicing && buildingState.elevators[2].isServicing)
+    {
+        return "";
+    }
+    
     return "e" + to_string(elevatorToUse) + "f" + to_string(floorMostPeople);
 }
 
