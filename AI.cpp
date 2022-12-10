@@ -22,7 +22,7 @@ string getAIMoveString(const BuildingState& buildingState)
     int floorMostPeople = 0;
     for(int i = 0; i < NUM_FLOORS; i++)
     {
-        if(buildingState.floors[i].numPeople > buildingState.floors[floorMostPeople].getNumPeople)
+        if(buildingState.floors[i].numPeople > buildingState.floors[floorMostPeople].numPeople)
         {
             floorMostPeople = i;
         }
