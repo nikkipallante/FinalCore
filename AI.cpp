@@ -47,5 +47,30 @@ string getAIMoveString(const BuildingState& buildingState)
 string getAIPickupList(const Move& move, const BuildingState& buildingState, 
                        const Floor& floorToPickup)
 {
+    string listUp = "";
+    string listDown = "";
+    if(floorToPickup.getHasUpRequest())
+    {
+        for (int i = 0; i < floorToPickup.getNumPeople(); i++)
+        {
+            if(floorToPickup.getPersonByIndex(i).getTargetFloor() > floorToPickup.getPersonByIndex(i).getCurrentFloor())
+            {
+                listUp = listUp + to_string(i);
+            }
+        }
+        return listUp;
+    }
+    if(floorToPickup.getHasDownRequest())
+    {
+        for (int i = 0; i < floorToPickup.getNumPeople(); i++)
+        {
+            if(floorToPickup.getPersonByIndex(i).getTargetFloor() < floorToPickup.getPersonByIndex(i).getCurrentFloor())
+            {
+                listDown = listDown + to_string(i);
+            }
+        }
+        return listDown;
+    }
+                                   
     return "";
 }
